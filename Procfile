@@ -1,1 +1,1 @@
-web: gunicorn reunion.wsgi
+web: gunicorn reunion.wsgi:application --log-file -

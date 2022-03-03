@@ -16,6 +16,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import dj_database_url
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -78,12 +79,16 @@ WSGI_APPLICATION = 'reunion.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+DATABASES = {     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postdb',
-    }
-}
+     }
+ }
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+
+DATABASES['default'].update(db_from_env) 
+
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
